@@ -6,10 +6,14 @@ from reportlab.graphics import renderPDF
 
 
 def download():
-    link = input('Введите ссылку на svg-файл. Если предыдущий файл был последним, оставьте поле пустым\n ~~ ')
+    link = input('Input the direct link to SVG-file. If the previous one was last, leave this space empty\n ~~ ')
     if not link:
         end()
-    open('temp.svg', 'wb').write(requests.get(link).content)
+    try:
+        open('temp.svg', 'wb').write(requests.get(link).content)
+    except requests.exceptions.MissingSchema:
+        print('Wrong url!')
+        download()
     convert()
 
 
@@ -37,19 +41,26 @@ def merge():
 
 
 def end():
-    name = input('Введите название файла\n ~~ ')
+    name = input('Input file name\n ~~ ')
     if not os.path.exists('pdf'):
         os.mkdir('pdf')
-    open(f'pdf/{name}.pdf', 'wb').write(open('file.pdf', 'rb').read())
-    os.remove('file.pdf')
-    os.remove('temp.pdf')
+    try:
+        open(f'pdf/{name}.pdf', 'wb').write(open('file.pdf', 'rb').read())
+    except OSError:
+        print('Wrong file name!')
+        end()
     os.remove('temp.svg')
+    os.remove('file.pdf')
+    try:
+        os.remove('temp.pdf')
+    except:
+        pass
     print('Thx for using!')
     exit()
 
 
 def main():
-    print('|| Не удаляйте файлы temp.svg, temp.pdf и file.pdf во время работы программы!!! ||\n')
+    print('|| DO NOT DELETE FILES temp.svg, temp.pdf & file.pdf WHILE THE PROGRAM WORKS!!! ||\n')
     download()
 
 
