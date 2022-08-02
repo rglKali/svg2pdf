@@ -38,10 +38,11 @@ def merge():
 
 
 def end():
+    name = input('Введите название файла\n ~~ ')
+    open(f'pdf/{name}.pdf', 'wb').write(open('file.pdf', 'rb').read())
+    os.remove('file.pdf')
     os.remove('temp.pdf')
     os.remove('temp.svg')
-    name = input('Введите название файла\n ~~ ')
-    os.rename('file.pdf', f'{name}.pdf')
     print('Thx for using!')
     exit()
 
