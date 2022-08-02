@@ -38,6 +38,8 @@ def merge():
 
 def end():
     name = input('Введите название файла\n ~~ ')
+    if not os.path.exists('pdf'):
+        os.mkdir('pdf')
     open(f'pdf/{name}.pdf', 'wb').write(open('file.pdf', 'rb').read())
     os.remove('file.pdf')
     os.remove('temp.pdf')
