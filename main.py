@@ -48,6 +48,7 @@ def end():
 
 
 def main():
+    print('|| Не удаляйте файлы temp.svg, temp.pdf и file.pdf во время работы программы!!! ||\n')
     download()
 
 
