@@ -33,7 +33,6 @@ def merge():
         os.remove('file_.pdf')
     else:
         os.rename('temp.pdf', 'file.pdf')
-
     download()
 
 
