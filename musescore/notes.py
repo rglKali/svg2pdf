@@ -37,7 +37,8 @@ class MusicScore:
             port=0,
             options=self.options,
             desired_capabilities=caps,
-            keep_alive=True
+            keep_alive=True,
+            executable_path=self.chromedriver_path,
         )
         self.wait = lambda seconds: WebDriverWait(self.driver, seconds)
         self.driver.get(self.link)
